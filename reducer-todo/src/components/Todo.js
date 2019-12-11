@@ -1,9 +1,19 @@
 import React from 'react';
 
-const Todo = (props) => {
+const Todo = ({ todo, dispatch }) => {
+    
+    const toggleTodo = e => {
+        dispatch({
+            type: 'TOGGLE_TODO',
+            payload: todo.id
+        })
+    } 
+
+
     return (
-        <div className="todo" >
-            <h3>{props.todo}</h3>
+        <div className="todo" 
+             onClick={toggleTodo}>
+            <h3>{todo}</h3>
         </div>
     )
 }
