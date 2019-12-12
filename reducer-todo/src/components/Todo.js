@@ -1,21 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-const Todo = ({ todo, dispatch }) => {
-    
-    const toggleTodo = e => {
-        dispatch({
-            type: 'TOGGLE_TODO',
-            payload: todo.id
-        })
-    } 
-
+const Todo = (props) => {
 
     return (
-        <div className="todo" 
-             onClick={toggleTodo}>
-            <h3>{todo}</h3>
+        <div>
+            <h2 className={props.item.completed ? 'complete' : ''}
+                onClick={(e) => {
+                e.preventDefault()
+                props.toggleTodo(props.item.id)
+            }} > {props.item.todo} </h2>
         </div>
     )
-}
+} 
 
 export default Todo;

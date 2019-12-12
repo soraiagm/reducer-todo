@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
-const Form = ({ dispatch }) => {
+const Form = (props) => {
     const [newTodo, setNewTodo] = useState('');
-    
-    
+
     const handleChanges = e => {
         e.preventDefault();
         setNewTodo(e.target.value);
@@ -11,44 +10,27 @@ const Form = ({ dispatch }) => {
     
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch({
-            type: 'ADD_TODO',
-            payload: newTodo
-        });
+        props.addTodo(newTodo);
         setNewTodo('');
     }
-
-
-    const deleteTodo = e => {
-        e.preventDefault();
-        dispatch({
-            type: 'DELETE_TODO',
-        })
-    }
-
+            
     
-    return (
-        <form onSubmit={handleSubmit}>
-            <input
+   return(
+    <form onSubmit={handleSubmit}>
+             <input
                 className="title-input"
                 type="text"
                 name="todo"
                 id="todo"
                 value={newTodo}
                 onChange={handleChanges}/>
-            <button
-                className="add-button"
-                type="submit">
-                Add new todo
-            </button>
-            <button
-                className="delete-button"
-                type="submit"
-                onClick={deleteTodo}>
-                Delete todo
-            </button>
-        </form>
-    )
-}
+        <button type='submit'>Add Todo</button>
+        <button type='submit' onClick={(e) => {
+            e.preventDefault()
+            props.clearTodo()
+      }}>Clear Todo</button>
+    </form>
+   )
+} 
 
 export default Form;

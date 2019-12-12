@@ -1,29 +1,18 @@
-import React, { useReducer } from 'react';
-import { reducer, initialState } from '../reducers/todoReducer';
-
-import Form from './Form.js';
+import React from 'react'
 import Todo from './Todo.js';
 
-const Todos = () => {
-    const [todosState, dispatch] = useReducer(reducer, initialState);
-    console.log(todosState);
-
-    
+const Todos = (props) => {
 
     return (
-        <div className="todos">
-            <Form dispatch={dispatch}/>
-            {todosState.todos.map(todo => (
-            <Todo
-                dispatch={dispatch}
-                key={todo.id} 
-                todo={todo.item}
-                 />
-            ))}
+        <div>
+            {props.state.map((todo) => {
+                return <Todo 
+                            key={todo.id} 
+                            item={todo}  
+                            toggleTodo={props.toggleTodo} />
+            })}
         </div>
     )
 }
-
-
 
 export default Todos;
